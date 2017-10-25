@@ -2,14 +2,14 @@
 Branden Lee, Stephen Lee, and Alex Morfin
 CIS 22C
 Fall 2017
-Lab 2
+Lab 2b
 
 Used Microsoft Visual Studio 2017
 
-Stack
-A Stack ADT derived from a singly linked list which will implement
-the most common Stack operations like push, pop, isempty etc.
-and only expose them.
+Queue Class
+queues are a type of container adaptor, 
+specifically designed to operate in a FIFO context (first-in first-out), 
+where elements are inserted into one end of the container and extracted from the other.
 */
 
 #ifndef STACK_H
@@ -17,17 +17,17 @@ and only expose them.
 #include "List.h"
 
 template <class T>
-class Stack : protected List<T>
+class Queue : protected List<T>
 {
 public:
 	//******************************************************
 	// Default Constructor        
 	//******************************************************
-	Stack () { List (); }
+	Queue () { List (); }
 	//******************************************************
 	// Destructor          
 	//******************************************************
-	~Stack () { clear (); }
+	~Queue () { clear (); }
 
 	//******************************************************
 	// pop        
@@ -84,7 +84,7 @@ public:
 	// operator<<        
 	//******************************************************
 	template <class T>
-	friend std::ostream& operator<< (std::ostream &foo, Stack<T> *ListPtr);
+	friend std::ostream& operator<< (std::ostream &foo, Queue<T> *ListPtr);
 };
 
 #endif

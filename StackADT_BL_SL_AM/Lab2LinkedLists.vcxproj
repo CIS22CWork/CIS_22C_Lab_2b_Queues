@@ -120,7 +120,7 @@
     <ClInclude Include="CurrencyYuan.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Node.h" />
-    <ClInclude Include="Stack.h" />
+    <ClInclude Include="Queue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandLineUI.cpp" />

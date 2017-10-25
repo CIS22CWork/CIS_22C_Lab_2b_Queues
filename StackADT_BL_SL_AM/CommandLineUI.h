@@ -6,26 +6,26 @@
 #include "CurrencyRupee.h"
 #include "CurrencyYen.h"
 #include "CurrencyYuan.h"
-#include "Stack.h"
+#include "Queue.h"
 
 class CommandLineUI
 {
 private:
-	Stack<int>* stackInt;
-	Stack<std::string>* stackString;
-	Stack<Currency>* stackCurrency;
+	Queue<int>* QueueInt;
+	Queue<std::string>* QueueString;
+	Queue<Currency>* QueueCurrency;
 	int menuOption;
 	int currentMenu;
 public:
-	CommandLineUI (Stack<int> *stackObjInt, Stack<std::string> *stackObjString, Stack<Currency> *stackObjCurrency);
+	CommandLineUI (Queue<int> *QueueObjInt, Queue<std::string> *QueueObjString, Queue<Currency> *QueueObjCurrency);
 	void enterLoop ();
-	void intStackPush ();
-	void intStackPop ();
-	void intStackClear ();
-	void stringStackPush ();
-	void stringStackPop ();
-	void stringStackClear ();
-	void currencyStackPush ();
-	void currencyStackPop ();
-	void currencyStackClear ();
+	void intQueuePush ();
+	void intQueuePop ();
+	void intQueueClear ();
+	void stringQueuePush ();
+	void stringQueuePop ();
+	void stringQueueClear ();
+	void currencyQueuePush ();
+	void currencyQueuePop ();
+	void currencyQueueClear ();
 };

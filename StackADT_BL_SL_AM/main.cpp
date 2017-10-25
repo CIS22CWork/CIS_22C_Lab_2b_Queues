@@ -8,7 +8,7 @@ Used Microsoft Visual Studio 2017
 Windows SDK Version: 10.0.16299.0
 
 main
-inits different stack classes and passes the UI for the demo
+inits different Queue classes and passes the UI for the demo
 */
 
 #include <iostream>
@@ -16,7 +16,7 @@ inits different stack classes and passes the UI for the demo
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
 
-#include "Stack.h"
+#include "Queue.h"
 #include "Currency.h"
 #include "CommandLineUI.h"
 
@@ -26,10 +26,10 @@ int main ()
 {
 	/* initialize random seed: */
 	srand ((int)time (NULL));
-	Stack<int> stackInt;
-	Stack<string> stackString;
-	Stack<Currency> stackCurrency;
-	CommandLineUI UI (&stackInt, &stackString, &stackCurrency);
+	Queue<int> QueueInt;
+	Queue<string> QueueString;
+	Queue<Currency> QueueCurrency;
+	CommandLineUI UI (&QueueInt, &QueueString, &QueueCurrency);
 	// start the UI
 	UI.enterLoop ();
 

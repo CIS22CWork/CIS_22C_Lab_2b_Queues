@@ -21,11 +21,11 @@ KEEP ALL COUT<< AND CIN>> HERE
 
 using namespace std;
 
-CommandLineUI::CommandLineUI (Stack<int> *stackObjInt, Stack<std::string> *stackObjString, Stack<Currency> *stackObjCurrency)
+CommandLineUI::CommandLineUI (Queue<int> *QueueObjInt, Queue<std::string> *QueueObjString, Queue<Currency> *QueueObjCurrency)
 {
-	stackInt = stackObjInt;
-	stackString = stackObjString;
-	stackCurrency = stackObjCurrency;
+	QueueInt = QueueObjInt;
+	QueueString = QueueObjString;
+	QueueCurrency = QueueObjCurrency;
 }
 
 /* ******************** enterLoop ********************
@@ -38,15 +38,15 @@ void CommandLineUI::enterLoop ()
 	while (loopActive)
 	{
 		cout << "Please enter the number representing the menu options below:" << endl
-			<< "1. Push random integers to the integer type stack" << endl
-			<< "2. Pop from the integer type stack" << endl
-			<< "3. Clear the integer type stack" << endl
-			<< "4. Push \"ExampleStrings.txt\" to the string type stack." << endl
-			<< "5. Pop from the string type stack" << endl
-			<< "6. Clear the string type stack" << endl
-			<< "7. Push a random Currency to the currency type stack" << endl
-			<< "8. Pop from the Currency type stack" << endl
-			<< "9. Clear the Currency type stack" << endl
+			<< "1. Push random integers to the integer type Queue" << endl
+			<< "2. Pop from the integer type Queue" << endl
+			<< "3. Clear the integer type Queue" << endl
+			<< "4. Push \"ExampleStrings.txt\" to the string type Queue." << endl
+			<< "5. Pop from the string type Queue" << endl
+			<< "6. Clear the string type Queue" << endl
+			<< "7. Push a random Currency to the currency type Queue" << endl
+			<< "8. Pop from the Currency type Queue" << endl
+			<< "9. Clear the Currency type Queue" << endl
 			<< "10. Exit Application" << endl << endl
 			<< "Selection Number: ";
 		// there is a bug that when you enter "test,2,3,hey" in the menu selection. 
@@ -69,162 +69,162 @@ void CommandLineUI::enterLoop ()
 		{
 			/* please keep each sub-menu in a separate function to increase readability and prevent
 			a huge blob of unorganized code. */
-			if (menuOption == 1) intStackPush ();
-			else if (menuOption == 2) intStackPop ();
-			else if (menuOption == 3) intStackClear ();
-			else if (menuOption == 4) stringStackPush ();
-			else if (menuOption == 5) stringStackPop ();
-			else if (menuOption == 6) stringStackClear ();
-			else if (menuOption == 7) currencyStackPush ();
-			else if (menuOption == 8) currencyStackPop ();
-			else if (menuOption == 9) currencyStackClear ();
+			if (menuOption == 1) intQueuePush ();
+			else if (menuOption == 2) intQueuePop ();
+			else if (menuOption == 3) intQueueClear ();
+			else if (menuOption == 4) stringQueuePush ();
+			else if (menuOption == 5) stringQueuePop ();
+			else if (menuOption == 6) stringQueueClear ();
+			else if (menuOption == 7) currencyQueuePush ();
+			else if (menuOption == 8) currencyQueuePop ();
+			else if (menuOption == 9) currencyQueueClear ();
 			else if (menuOption == 10) loopActive = false;
 		}
 	}
 }
 
 //******************************************************
-// CommandLineUI::intStackPush   
+// CommandLineUI::intQueuePush   
 //      
-// This is an example of the stack push method
+// This is an example of the Queue push method
 //******************************************************
-void CommandLineUI::intStackPush ()
+void CommandLineUI::intQueuePush ()
 {
 	int intRandom = rand () % 99999;
-	stackInt->push (intRandom);
-	cout << "integer stack items:" << endl << stackInt << endl << endl;
+	QueueInt->push (intRandom);
+	cout << "integer Queue items:" << endl << QueueInt << endl << endl;
 }
 
 //******************************************************
-// CommandLineUI::intStackPop         
+// CommandLineUI::intQueuePop         
 //      
-// This is an example of the stack pop method
+// This is an example of the Queue pop method
 //******************************************************
-void CommandLineUI::intStackPop ()
+void CommandLineUI::intQueuePop ()
 {
-	if (stackInt->empty ())
+	if (QueueInt->empty ())
 	{
 		cout << "************************************" << endl;
-		cout << "Stack is empty! Underflow Condition!" << endl;
+		cout << "Queue is empty! Underflow Condition!" << endl;
 		cout << "************************************" << endl << endl;
 	}
 	else
 	{
-		stackInt->pop ();
-		cout << "integer stack items:" << endl << stackInt << endl << endl;
+		QueueInt->pop ();
+		cout << "integer Queue items:" << endl << QueueInt << endl << endl;
 	}
 }
 
 //******************************************************
-// CommandLineUI::intStackClear         
+// CommandLineUI::intQueueClear         
 //      
 // This is an example of the list clear method
 //******************************************************
-void CommandLineUI::intStackClear ()
+void CommandLineUI::intQueueClear ()
 {
-	stackInt->clear ();
-	cout << "integer stack items:" << endl << stackInt << endl << endl;
+	QueueInt->clear ();
+	cout << "integer Queue items:" << endl << QueueInt << endl << endl;
 }
 
 //******************************************************
-// CommandLineUI::stringStackPush
+// CommandLineUI::stringQueuePush
 //      
-// This is an example of the stack push method
+// This is an example of the Queue push method
 //******************************************************
-void CommandLineUI::stringStackPush ()
+void CommandLineUI::stringQueuePush ()
 {
 	string buffer;
 	ifstream read_input_file ("ExampleStrings.txt");
 
-	cout << "Pushing \"ExampleStrings.txt\" contents to stack:" << endl;
+	cout << "Pushing \"ExampleStrings.txt\" contents to Queue:" << endl;
 	while (true)
 	{
 		read_input_file >> buffer;
 		if (!read_input_file) break;
-		stackString->push (buffer);
+		QueueString->push (buffer);
 	}
 	read_input_file.close ();
-	cout << "string stack items:" << endl << stackString << endl << endl;
+	cout << "string Queue items:" << endl << QueueString << endl << endl;
 }
 
 //******************************************************
-// CommandLineUI::stringStackPop        
+// CommandLineUI::stringQueuePop        
 //      
-// This is an example of the stack pop method
+// This is an example of the Queue pop method
 //******************************************************
-void CommandLineUI::stringStackPop ()
+void CommandLineUI::stringQueuePop ()
 {
-	if (stackString->empty ())
+	if (QueueString->empty ())
 	{
 		cout << "************************************" << endl;
-		cout << "Stack is empty! Underflow Condition!" << endl;
+		cout << "Queue is empty! Underflow Condition!" << endl;
 		cout << "************************************" << endl << endl;
 	}
 	else
 	{
-		stackString->pop ();
-		cout << "string stack items:" << endl << stackString << endl << endl;
+		QueueString->pop ();
+		cout << "string Queue items:" << endl << QueueString << endl << endl;
 	}
 }
 
 //******************************************************
-// CommandLineUI::stringStackClear         
+// CommandLineUI::stringQueueClear         
 //      
 // This is an example of the list clear method
 //******************************************************
-void CommandLineUI::stringStackClear ()
+void CommandLineUI::stringQueueClear ()
 {
-	stackString->clear ();
-	cout << "string stack items:" << endl << stackString << endl << endl;
+	QueueString->clear ();
+	cout << "string Queue items:" << endl << QueueString << endl << endl;
 }
 
 //******************************************************
-// CommandLineUI::currencyStackPush
+// CommandLineUI::currencyQueuePush
 //      
-// This is an example of the stack push method
+// This is an example of the Queue push method
 //******************************************************
-void CommandLineUI::currencyStackPush ()
+void CommandLineUI::currencyQueuePush ()
 {
 	// randomly generates a derived currency class class and fills it with
-	// money 0-100 whole and 0-99 fractional parts then pushes it onto the stack
+	// money 0-100 whole and 0-99 fractional parts then pushes it onto the Queue
 	int intRandom = rand () % 4;
-	if (intRandom == 0) stackCurrency->push (CurrencyDollar (rand () % 100, rand () % 99));
-	else if (intRandom == 1) stackCurrency->push (CurrencyEuro (rand () % 100, rand () % 99));
-	else if (intRandom == 2) stackCurrency->push (CurrencyRupee (rand () % 100, rand () % 99));
-	else if (intRandom == 3) stackCurrency->push (CurrencyYen (rand () % 100, rand () % 99));
-	else if (intRandom == 4) stackCurrency->push (CurrencyYuan (rand () % 100, rand () % 99));
-	cout << "Currency stack items:" << endl << stackCurrency << endl << endl;
+	if (intRandom == 0) QueueCurrency->push (CurrencyDollar (rand () % 100, rand () % 99));
+	else if (intRandom == 1) QueueCurrency->push (CurrencyEuro (rand () % 100, rand () % 99));
+	else if (intRandom == 2) QueueCurrency->push (CurrencyRupee (rand () % 100, rand () % 99));
+	else if (intRandom == 3) QueueCurrency->push (CurrencyYen (rand () % 100, rand () % 99));
+	else if (intRandom == 4) QueueCurrency->push (CurrencyYuan (rand () % 100, rand () % 99));
+	cout << "Currency Queue items:" << endl << QueueCurrency << endl << endl;
 }
 
 //******************************************************
-// CommandLineUI::currencyStackPop      
+// CommandLineUI::currencyQueuePop      
 //      
-// This is an example of the stack pop method
+// This is an example of the Queue pop method
 //******************************************************
-void CommandLineUI::currencyStackPop ()
+void CommandLineUI::currencyQueuePop ()
 {
-	if (stackCurrency->empty ())
+	if (QueueCurrency->empty ())
 	{
 		cout << "************************************" << endl;
-		cout << "Stack is empty! Underflow Condition!" << endl;
+		cout << "Queue is empty! Underflow Condition!" << endl;
 		cout << "************************************" << endl << endl;
 	}
 	else
 	{
-		stackCurrency->pop ();
-		cout << "Currency stack items:" << endl << stackCurrency << endl << endl;
+		QueueCurrency->pop ();
+		cout << "Currency Queue items:" << endl << QueueCurrency << endl << endl;
 	}
 }
 
 //******************************************************
-// CommandLineUI::currencyStackClear         
+// CommandLineUI::currencyQueueClear         
 //      
 // This is an example of the list clear method
 //******************************************************
-void CommandLineUI::currencyStackClear ()
+void CommandLineUI::currencyQueueClear ()
 {
-	stackCurrency->clear ();
-	cout << "Currency stack items:" << endl << stackCurrency << endl << endl;
+	QueueCurrency->clear ();
+	cout << "Currency Queue items:" << endl << QueueCurrency << endl << endl;
 }
 
 //******************************************************
@@ -250,7 +250,7 @@ std::ostream& operator<< (std::ostream &foo, List<T> *ListPtr)
 	return foo;
 }
 template <class T>
-std::ostream& operator<< (std::ostream &foo, Stack<T> *ListPtr)
+std::ostream& operator<< (std::ostream &foo, Queue<T> *ListPtr)
 {
 	// Since operator<< is a friend of the List class, we can access
 	// it's members directly.
