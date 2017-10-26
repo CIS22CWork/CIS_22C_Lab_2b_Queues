@@ -52,41 +52,31 @@ public:
 	}
 
 	//******************************************************
-	// push_back             
+	// clear          
 	//
-	// posts to the end of the list. If successful, newEntry 
-	// is stored in the list and the count of items in the 
-	// list has increased by 1.
-	// param newEntry The object to be added as a new entry.
-	// return True if addition was successful, or false if not.    
+	// Removes all elements from the list container
+	// and leaving the container with a size of 0.
 	//******************************************************
-	bool push_back (T newEntry)
+	void clear ()
 	{
-		Node<T> *newNode;
 		Node<T> *currentNode;
-		bool returnStatus = true;
+		Node<T> *deletedNode;
+		Node<T> *nextNode;
 
-		newNode = new Node<T> (newEntry);
-
-		if (empty ())
-		{
-			tail = newNode;
-			head = tail;
-			itemCount++;
-		}
-		else
+		if (!empty ())
 		{
 			currentNode = tail;
-
-			while (currentNode->next)
-				currentNode = currentNode->next;
-
-			currentNode->next = newNode;
-			head = currentNode->next;
-			itemCount++;
+			while (currentNode != nullptr)
+			{
+				nextNode = currentNode->next;
+				deletedNode = currentNode;
+				currentNode = nextNode;
+				delete deletedNode;
+			}
 		}
-		return returnStatus;
+		itemCount = 0;
 	}
+
 	//******************************************************
 	// insert       
 	//
@@ -95,28 +85,33 @@ public:
 	// This effectively increases the list size by the
 	// amount of elements inserted.
 	//******************************************************
-	bool insert (int position, T val)
+	bool insert (unsigned int position, T val)
 	{
 		Node<T> *newNode;
 		Node<T> *currentNode;
 		Node<T> *prevNode;
 		bool returnStatus = false;
-		unsigned int i;
+		unsigned int i = 0;
 
-		newNode = new Node<T> (newEntry);
+		newNode = nullptr;
 		currentNode = tail;
-
-		if (position <= 0 && position <= itemCount - 1)
+		prevNode = nullptr;
+		// position 0 = front
+		// position size = back
+		// position 1 = after first element
+		if (position >= 0 && position <= itemCount)
 		{
-			for (i=0;i<=position;i++)
+			for (i = 0; i <= position; i++)
 			{
-				if (i==position)
+				if (i == position)
 				{
+					newNode = new Node<T> (val);
 					returnStatus = true;
 					if (i != 0) prevNode->next = newNode;
 					else tail = newNode;
-					if (i != itemCount - 1) newNode->next = currentNode;
+					if (i != itemCount) newNode->next = currentNode;
 					else head = newNode;
+					itemCount++;
 				}
 				else
 				{
@@ -127,6 +122,59 @@ public:
 		}
 		return returnStatus;
 	}
+
+	//******************************************************
+	// push_back             
+	//
+	// posts to the end of the list. If successful, newEntry 
+	// is stored in the list and the count of items in the 
+	// list has increased by 1.
+	// param newEntry The object to be added as a new entry.
+	// return True if addition was successful, or false if not.    
+	//******************************************************
+	bool push_back (T newEntry)
+	{
+		bool returnStatus = insert (itemCount, newEntry);
+		return returnStatus;
+	}
+
+	//******************************************************
+	// push_front           
+	//
+	// Prepends the given element value to the beginning of 
+	// the container.  
+	// return: true on success, false on fail
+	//******************************************************
+	bool push_front (T newEntry)
+	{
+		bool returnStatus = insert (0, newEntry);
+		return returnStatus;
+	}
+
+	//******************************************************
+	// pop_front          
+	//
+	// Removes the first element of the container.
+	// return: true on success, false on fail
+	//******************************************************
+	bool pop_front ()
+	{
+		bool returnStatus = erase (0);
+		return returnStatus;
+	}
+
+	//******************************************************
+	// pop_back         
+	//
+	// Removes the first element of the container.
+	// return: true on success, false on fail
+	//******************************************************
+	bool pop_back()
+	{
+		bool returnStatus = erase (itemCount-1);
+		return returnStatus;
+	}
+
 	//******************************************************
 	// erase          
 	//
@@ -289,31 +337,7 @@ public:
 		}
 		return returnValue;
 	}
-	//******************************************************
-	// clear          
-	//
-	// Removes all elements from the list container
-	// and leaving the container with a size of 0.
-	//******************************************************
-	void clear ()
-	{
-		Node<T> *currentNode;
-		Node<T> *deletedNode;
-		Node<T> *nextNode;
 
-		if (!empty())
-		{
-			currentNode = tail;
-			while (currentNode != nullptr)
-			{
-				nextNode = currentNode->next;
-				deletedNode = currentNode;
-				currentNode = nextNode;
-				delete deletedNode;
-			}
-		}
-		itemCount = 0;
-	}
 	//******************************************************
 	// getTail        
 	//
