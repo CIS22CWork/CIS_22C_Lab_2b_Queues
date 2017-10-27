@@ -30,38 +30,36 @@ public:
 	~Queue () { clear (); }
 
 	//******************************************************
-	// pop        
-	//
-	// removes the top element     
-	//******************************************************
-	bool pop ()
-	{
-		return erase (size () - 1);
-	}
-
-	//******************************************************
-	// push        
-	//
-	// inserts element at the top     
-	//******************************************************
-	bool push (T newEntry)
-	{
-		return push_back (newEntry);
-	}
-
-	//******************************************************
 	// empty        
 	//
-	// checks whether the underlying container is empty     
+	// Returns whether the queue is empty: 
+	// i.e. whether its size is zero.
 	//******************************************************
 	bool empty () { return List::empty (); }
 
 	//******************************************************
 	// size         
 	//
-	// returns the number of elements     
+	// Returns the number of elements in the queue. 
 	//******************************************************
 	int size () { return List::size (); }
+
+	//******************************************************
+	// pop        
+	//
+	// Removes the next element in the queue, 
+	// effectively reducing its size by one.   
+	//******************************************************
+	bool pop (){ return List::pop_front(); }
+
+	//******************************************************
+	// push        
+	//
+	// Inserts a new element at the end of the queue, 
+	// after its current last element. The content of this 
+	// new element is initialized to val.
+	//******************************************************
+	bool push (T val){ return List::push_back (val); }
 
 	//******************************************************
 	// clear          
@@ -72,14 +70,21 @@ public:
 	void clear () { List::clear (); }
 
 	//******************************************************
-	// top        
+	// front       
 	//
-	// accesses the top element     
+	// Returns a reference to the next element in the queue.  
 	//******************************************************
-	T top ()
-	{
-		return getValue (size () - 1);
-	}
+	T front (){ return getValue (size () - 1); }
+
+	//******************************************************
+	// back       
+	//
+	// Returns a reference to the last element in the queue. 
+	// This is the "newest" element in the queue 
+	// (i.e. the last element pushed into the queue). 
+	//******************************************************
+	T back () { return getValue (0); }
+
 	//******************************************************
 	// operator<<        
 	//******************************************************
