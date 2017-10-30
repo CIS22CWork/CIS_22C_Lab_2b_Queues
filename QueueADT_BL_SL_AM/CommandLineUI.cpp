@@ -38,16 +38,19 @@ void CommandLineUI::enterLoop ()
 	while (loopActive)
 	{
 		cout << "Please enter the number representing the menu options below:" << endl
-			<< "1. Push random integers to the integer type Queue" << endl
-			<< "2. Pop from the integer type Queue" << endl
-			<< "3. Clear the integer type Queue" << endl
-			<< "4. Push \"ExampleStrings.txt\" to the string type Queue." << endl
-			<< "5. Pop from the string type Queue" << endl
-			<< "6. Clear the string type Queue" << endl
-			<< "7. Push a random Currency to the currency type Queue" << endl
-			<< "8. Pop from the Currency type Queue" << endl
-			<< "9. Clear the Currency type Queue" << endl
-			<< "10. Exit Application" << endl << endl
+			<< "1. Push random integer to the integer type Queue" << endl
+			<< "2. Push custom integer to the integer type Queue" << endl
+			<< "3. Pop from the integer type Queue" << endl
+			<< "4. Clear the integer type Queue" << endl
+			<< "5. Push \"ExampleStrings.txt\" to the string type Queue." << endl
+			<< "6. Push custom string to the string type Queue" << endl
+			<< "7. Pop from the string type Queue" << endl
+			<< "8. Clear the string type Queue" << endl
+			<< "9. Push a random Currency to the currency type Queue" << endl
+			<< "10. Push custom Currency to the Currency type Queue" << endl
+			<< "11. Pop from the Currency type Queue" << endl
+			<< "12. Clear the Currency type Queue" << endl
+			<< "13. Exit Application" << endl << endl
 			<< "Selection Number: ";
 		// there is a bug that when you enter "test,2,3,hey" in the menu selection. 
 		// The program gets stuck in an infinite loop
@@ -59,7 +62,7 @@ void CommandLineUI::enterLoop ()
 			menuOption = 0;
 		}
 		cout << endl;
-		if (menuOption < 1 || menuOption > 10)
+		if (menuOption < 1 || menuOption > 13)
 		{
 			cout << "************************************" << endl;
 			cout << "Your selection was not valid. Please try again." << endl;
@@ -70,15 +73,18 @@ void CommandLineUI::enterLoop ()
 			/* please keep each sub-menu in a separate function to increase readability and prevent
 			a huge blob of unorganized code. */
 			if (menuOption == 1) intQueuePush ();
-			else if (menuOption == 2) intQueuePop ();
-			else if (menuOption == 3) intQueueClear ();
-			else if (menuOption == 4) stringQueuePush ();
-			else if (menuOption == 5) stringQueuePop ();
-			else if (menuOption == 6) stringQueueClear ();
-			else if (menuOption == 7) currencyQueuePush ();
-			else if (menuOption == 8) currencyQueuePop ();
-			else if (menuOption == 9) currencyQueueClear ();
-			else if (menuOption == 10) loopActive = false;
+			if (menuOption == 2) intQueuePush2 ();
+			else if (menuOption == 3) intQueuePop ();
+			else if (menuOption == 4) intQueueClear ();
+			else if (menuOption == 5) stringQueuePush ();
+			else if (menuOption == 6) stringQueuePush2 ();
+			else if (menuOption == 7) stringQueuePop ();
+			else if (menuOption == 8) stringQueueClear ();
+			else if (menuOption == 9) currencyQueuePush ();
+			else if (menuOption == 10) currencyQueuePush2 ();
+			else if (menuOption == 11) currencyQueuePop ();
+			else if (menuOption == 12) currencyQueueClear ();
+			else if (menuOption == 13) loopActive = false;
 		}
 	}
 }
@@ -92,6 +98,21 @@ void CommandLineUI::intQueuePush ()
 {
 	int intRandom = rand () % 99999;
 	QueueInt->push (intRandom);
+	cout << "integer Queue items:" << endl << QueueInt << endl << endl;
+}
+
+//******************************************************
+// CommandLineUI::intQueuePush2   
+//      
+// This is an example of the Queue push method
+//******************************************************
+void CommandLineUI::intQueuePush2 ()
+{
+	int inputInt;
+	cout << "Input an integer: ";
+	cin >> inputInt;
+	QueueInt->push (inputInt);
+	cout << endl;
 	cout << "integer Queue items:" << endl << QueueInt << endl << endl;
 }
 
@@ -148,6 +169,23 @@ void CommandLineUI::stringQueuePush ()
 }
 
 //******************************************************
+// CommandLineUI::stringQueuePush2
+//      
+// This is an example of the Queue push method
+//******************************************************
+void CommandLineUI::stringQueuePush2 ()
+{
+	string inputString;
+	cout << "Input a string: ";
+	cin.clear ();
+	cin.ignore (std::numeric_limits<std::streamsize>::max (), '\n'); // discards "bad" characters
+	getline (cin, inputString);
+	QueueString->push (inputString);
+	cout << endl;
+	cout << "string Queue items:" << endl << QueueString << endl << endl;
+}
+
+//******************************************************
 // CommandLineUI::stringQueuePop        
 //      
 // This is an example of the Queue pop method
@@ -197,6 +235,28 @@ void CommandLineUI::currencyQueuePush ()
 }
 
 //******************************************************
+// CommandLineUI::currencyQueuePush2
+//      
+// This is an example of the Queue push method
+//******************************************************
+void CommandLineUI::currencyQueuePush2 ()
+{
+	string inputString;
+	cout << "Dollar/Euro/Rupee/Yen/Yuan" << endl;
+	cout << "Input a Currency: ";
+	cin.clear ();
+	cin.ignore (std::numeric_limits<std::streamsize>::max (), '\n'); // discards "bad" characters
+	getline (cin, inputString);
+	if (inputString == "Dollar") QueueCurrency->push (CurrencyDollar (rand () % 100, rand () % 99));
+	else if (inputString == "Euro") QueueCurrency->push (CurrencyEuro (rand () % 100, rand () % 99));
+	else if (inputString == "Rupee") QueueCurrency->push (CurrencyRupee (rand () % 100, rand () % 99));
+	else if (inputString == "Yen") QueueCurrency->push (CurrencyYen (rand () % 100, rand () % 99));
+	else if (inputString == "Yuan") QueueCurrency->push (CurrencyYuan (rand () % 100, rand () % 99));
+	cout << endl;
+	cout << "Currency Queue items:" << endl << QueueCurrency << endl << endl;
+}
+
+//******************************************************
 // CommandLineUI::currencyQueuePop      
 //      
 // This is an example of the Queue pop method
@@ -233,38 +293,26 @@ void CommandLineUI::currencyQueueClear ()
 template <class T>
 std::ostream& operator<< (std::ostream &foo, List<T> *ListPtr)
 {
-	// Since operator<< is a friend of the List class, we can access
-	// it's members directly.
-	int itemCount = 0;
+	unsigned int i, j;
+	unsigned int n = ListPtr->size ();
 	if (ListPtr->empty ()) cout << "List is empty" << endl;
 	else
-	{
-		Node<T> *currPtr = ListPtr->getTail ();
-		while (currPtr != nullptr)
+		for (i = 0; i < n; i++)
 		{
-			itemCount++;
-			foo << itemCount << ". " << currPtr->value << endl;
-			currPtr = currPtr->next;
+			foo << i + 1 << ". " << ListPtr->getValue (i) << endl;
 		}
-	}
 	return foo;
 }
 template <class T>
 std::ostream& operator<< (std::ostream &foo, Queue<T> *ListPtr)
 {
-	// Since operator<< is a friend of the List class, we can access
-	// it's members directly.
-	int itemCount = 0;
-	if (ListPtr->empty ()) cout << "List is empty" << endl;
+	unsigned int i;
+	unsigned int n = ListPtr->size ();
+	if (ListPtr->empty ()) cout << "Queue is empty" << endl;
 	else
-	{
-		Node<T> *currPtr = ListPtr->getTail ();
-		while (currPtr != nullptr)
+		for (i = 0; i < n; i++)
 		{
-			itemCount++;
-			foo << itemCount << ". " << currPtr->value << endl;
-			currPtr = currPtr->next;
+			foo << i + 1 << ". " << ListPtr->getValue (i) << endl;
 		}
-	}
 	return foo;
 }

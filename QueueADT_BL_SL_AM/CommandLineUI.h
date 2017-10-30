@@ -20,12 +20,15 @@ public:
 	CommandLineUI (Queue<int> *QueueObjInt, Queue<std::string> *QueueObjString, Queue<Currency> *QueueObjCurrency);
 	void enterLoop ();
 	void intQueuePush ();
+	void intQueuePush2 ();
 	void intQueuePop ();
 	void intQueueClear ();
 	void stringQueuePush ();
+	void stringQueuePush2 ();
 	void stringQueuePop ();
 	void stringQueueClear ();
 	void currencyQueuePush ();
+	void currencyQueuePush2 ();
 	void currencyQueuePop ();
 	void currencyQueueClear ();
 };

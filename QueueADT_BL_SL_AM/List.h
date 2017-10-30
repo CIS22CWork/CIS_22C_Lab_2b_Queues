@@ -16,6 +16,7 @@ count of items in the list, empty the list, etc.
 #ifndef LIST_H
 #define LIST_H
 #include "Node.h"
+#include <iostream>
 
 /*
 To make an array have linked lists
@@ -28,8 +29,25 @@ class List
 private:
 	Node<T> *head;
 	Node<T> *tail;
-	int itemCount;
+	unsigned int itemCount;
 public:
+	//******************************************************
+	// Default Constructor        
+	//******************************************************
+	List ()
+	{
+		head = nullptr;
+		tail = nullptr;
+		itemCount = 0;
+	}
+	//******************************************************
+	// Destructor          
+	//******************************************************
+	virtual ~List () { clear (); }
+	//******************************************************
+	// Copy Constructor (May not contain template argument)
+	//******************************************************
+
 	//******************************************************
 	// empty        
 	//
@@ -91,7 +109,7 @@ public:
 		Node<T> *currentNode;
 		Node<T> *prevNode;
 		bool returnStatus = false;
-		unsigned int i = 0;
+		unsigned int i;
 
 		newNode = nullptr;
 		currentNode = tail;
@@ -122,6 +140,22 @@ public:
 		}
 		return returnStatus;
 	}
+
+	//******************************************************
+	// front       
+	//
+	// Returns a reference to the first element in the 
+	// list container.
+	//******************************************************
+	T front () { return getValue (0); }
+
+	//******************************************************
+	// back       
+	//
+	// Returns a reference to the last element in the 
+	// list container.
+	//******************************************************
+	T back () { return getValue (size () - 1); }
 
 	//******************************************************
 	// push_back             
@@ -169,9 +203,9 @@ public:
 	// Removes the first element of the container.
 	// return: true on success, false on fail
 	//******************************************************
-	bool pop_back()
+	bool pop_back ()
 	{
-		bool returnStatus = erase (itemCount-1);
+		bool returnStatus = erase (itemCount - 1);
 		return returnStatus;
 	}
 
@@ -183,54 +217,36 @@ public:
 	// list count decremented by 1 if successful.
 	// returns true if addition was successful, or false if not.    
 	//******************************************************
-	bool erase (int indexRemove)
+	bool erase (unsigned int position)
 	{
 		Node<T> *currentNode;
 		Node<T> *prevNode;
 		Node<T> *deletedNode;
 		bool returnStatus = false;
+		unsigned int i;
 
 		currentNode = tail;
 		prevNode = nullptr;
 		deletedNode = nullptr;
 
-		if (indexRemove >= 0 && indexRemove < itemCount)
+		if (position >= 0 && position < itemCount)
 		{
-			// loop starts from tail and moves towards head.
-			for (int i = 0; i <= indexRemove; i++)
+			for (i = 0; i <= position; i++)
 			{
-				// found the index. lets remove it
-				if (i == indexRemove)
+				if (i == position)
 				{
-					returnStatus = true;
 					deletedNode = currentNode;
-					if (i == 0)
-					{
-						// deleted the tail
-						if (itemCount > 0)
-						{
-							currentNode = currentNode->next;
-						}
-						tail = currentNode;
-					}
-					else if (i == itemCount - 1)
-					{
-						// deleted the head
-						prevNode->next = nullptr;
-						head = prevNode;
-					}
-					if (i > 0 && i < itemCount - 1)
-					{
-						// there is a previous and a next
-						prevNode->next = currentNode->next;
-					}
-					delete deletedNode;
+					if (i != 0 && i != itemCount) prevNode->next = currentNode->next;
+					if (i == 0 && i == itemCount) { head = nullptr; tail = nullptr; };
+					if (i == 0 && i != itemCount) tail = currentNode->next;
+					if (i != 0 && i == itemCount) head = prevNode->next;
+					currentNode->next = nullptr;
+					delete currentNode;
 					itemCount--;
 				}
-				// next
-				prevNode = currentNode;
-				if (i < itemCount - 1)
+				else
 				{
+					prevNode = currentNode;
 					currentNode = currentNode->next;
 				}
 			}
@@ -311,28 +327,20 @@ public:
 	//
 	// returns the value of the list node index.
 	//******************************************************
-	T getValue (int indexGet)
+	T getValue (unsigned int position)
 	{
 		Node<T> *currentNode;
 		T returnValue;
 
+		unsigned int i;
 		currentNode = tail;
 
-		if (indexGet >= 0 && indexGet < itemCount)
+		if (position >= 0 && position < itemCount)
 		{
-			// loop starts from tail and moves towards head.
-			for (int i = 0; i <= indexGet; i++)
+			for (i = 0; i <= position; i++)
 			{
-				// found the index. lets get it.
-				if (i == indexGet)
-				{
-					returnValue = currentNode->value;
-				}
-				// next
-				if (i < itemCount - 1)
-				{
-					currentNode = currentNode->next;
-				}
+				if (i == position) returnValue = currentNode->value;
+				else currentNode = currentNode->next;
 			}
 		}
 		return returnValue;
@@ -349,18 +357,17 @@ public:
 	}
 
 	//******************************************************
-	// Default Constructor        
+	// copy       
+	//
+	// pushes the target list object elements to this list
+	// call clear() if you want an exact copy
+	// this method wont make a copy if the element is an object
 	//******************************************************
-	List ()
+	void copy (List<T> *target)
 	{
-		head = nullptr;
-		tail = nullptr;
-		itemCount = 0;
+		unsigned int n = target->size ();
+		for (unsigned int i = 0; i < n; i++) push_back (target->getValue (i));
 	}
-	//******************************************************
-	// Destructor          
-	//******************************************************
-	virtual ~List () { clear (); }
 
 	//******************************************************
 	// operator<<        
