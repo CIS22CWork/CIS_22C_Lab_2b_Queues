@@ -30,7 +30,11 @@ CommandLineUI::CommandLineUI (Queue<int> *QueueObjInt, Queue<std::string> *Queue
 
 /* ******************** enterLoop ********************
 the main menu UI loop
-*/
+Pre: None
+Post: None
+Purpose: Loop for the user interface, allows the user to perform operations
+through a if else statement;
+//******************************************************
 void CommandLineUI::enterLoop ()
 {
 	cout << "Welcome to our linked list demo. ";
@@ -93,6 +97,10 @@ void CommandLineUI::enterLoop ()
 // CommandLineUI::intQueuePush   
 //      
 // This is an example of the Queue push method
+//
+// Pre: None
+// Post: None
+// Purpose: Push a random integer into the integer queue by calling push();
 //******************************************************
 void CommandLineUI::intQueuePush ()
 {
@@ -105,6 +113,10 @@ void CommandLineUI::intQueuePush ()
 // CommandLineUI::intQueuePush2   
 //      
 // This is an example of the Queue push method
+//
+// Pre: None
+// Post: None
+// Purpose: Push an user inputted integer into the integer queue by calling push();
 //******************************************************
 void CommandLineUI::intQueuePush2 ()
 {
@@ -120,6 +132,10 @@ void CommandLineUI::intQueuePush2 ()
 // CommandLineUI::intQueuePop         
 //      
 // This is an example of the Queue pop method
+//
+// Pre: None
+// Post: None
+// Purpose: Pop an integer from the integer queue by calling pop();
 //******************************************************
 void CommandLineUI::intQueuePop ()
 {
@@ -140,6 +156,10 @@ void CommandLineUI::intQueuePop ()
 // CommandLineUI::intQueueClear         
 //      
 // This is an example of the list clear method
+//
+// Pre: None
+// Post: None
+// Purpose: Clears the integer queue by calling clear();
 //******************************************************
 void CommandLineUI::intQueueClear ()
 {
@@ -151,6 +171,10 @@ void CommandLineUI::intQueueClear ()
 // CommandLineUI::stringQueuePush
 //      
 // This is an example of the Queue push method
+//
+// Pre: None
+// Post: None
+// Purpose: Push a string from a txt file into the string queue by calling push();
 //******************************************************
 void CommandLineUI::stringQueuePush ()
 {
@@ -172,6 +196,10 @@ void CommandLineUI::stringQueuePush ()
 // CommandLineUI::stringQueuePush2
 //      
 // This is an example of the Queue push method
+//
+// Pre: None
+// Post: None
+// Purpose: Push an user inputted string into the string queue by calling push();
 //******************************************************
 void CommandLineUI::stringQueuePush2 ()
 {
@@ -189,6 +217,10 @@ void CommandLineUI::stringQueuePush2 ()
 // CommandLineUI::stringQueuePop        
 //      
 // This is an example of the Queue pop method
+//
+// Pre: None
+// Post: None
+// Purpose: Pop from the front of the string queue by calling pop();
 //******************************************************
 void CommandLineUI::stringQueuePop ()
 {
@@ -209,6 +241,10 @@ void CommandLineUI::stringQueuePop ()
 // CommandLineUI::stringQueueClear         
 //      
 // This is an example of the list clear method
+//
+// Pre: None
+// Post: None
+// Purpose: Clears the string queue by calling clear();
 //******************************************************
 void CommandLineUI::stringQueueClear ()
 {
@@ -220,6 +256,10 @@ void CommandLineUI::stringQueueClear ()
 // CommandLineUI::currencyQueuePush
 //      
 // This is an example of the Queue push method
+//
+// Pre: None
+// Post: None
+// Purpose: Push a random currency into the currency queue by calling push();
 //******************************************************
 void CommandLineUI::currencyQueuePush ()
 {
@@ -238,6 +278,10 @@ void CommandLineUI::currencyQueuePush ()
 // CommandLineUI::currencyQueuePush2
 //      
 // This is an example of the Queue push method
+//
+// Pre: None
+// Post: None
+// Purpose: Push an user inputted currency into the currency queue by calling push();
 //******************************************************
 void CommandLineUI::currencyQueuePush2 ()
 {
@@ -260,6 +304,10 @@ void CommandLineUI::currencyQueuePush2 ()
 // CommandLineUI::currencyQueuePop      
 //      
 // This is an example of the Queue pop method
+//
+// Pre: None
+// Post: None
+// Purpose: Pop an currency from the currency queue by calling pop();
 //******************************************************
 void CommandLineUI::currencyQueuePop ()
 {
@@ -280,6 +328,10 @@ void CommandLineUI::currencyQueuePop ()
 // CommandLineUI::currencyQueueClear         
 //      
 // This is an example of the list clear method
+//
+// Pre: None
+// Post: None
+// Purpose: Clears the currency queue by calling clear();
 //******************************************************
 void CommandLineUI::currencyQueueClear ()
 {
