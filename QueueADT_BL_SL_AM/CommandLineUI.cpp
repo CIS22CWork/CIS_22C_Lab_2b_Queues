@@ -28,13 +28,13 @@ CommandLineUI::CommandLineUI (Queue<int> *QueueObjInt, Queue<std::string> *Queue
 	QueueCurrency = QueueObjCurrency;
 }
 
-/* ******************** enterLoop ********************
+/********************* enterLoop ********************
 the main menu UI loop
 Pre: None
 Post: None
 Purpose: Loop for the user interface, allows the user to perform operations
 through a if else statement;
-//******************************************************
+*/
 void CommandLineUI::enterLoop ()
 {
 	cout << "Welcome to our linked list demo. ";
@@ -77,7 +77,7 @@ void CommandLineUI::enterLoop ()
 			/* please keep each sub-menu in a separate function to increase readability and prevent
 			a huge blob of unorganized code. */
 			if (menuOption == 1) intQueuePush ();
-			if (menuOption == 2) intQueuePush2 ();
+			else if (menuOption == 2) intQueuePush2 ();
 			else if (menuOption == 3) intQueuePop ();
 			else if (menuOption == 4) intQueueClear ();
 			else if (menuOption == 5) stringQueuePush ();
