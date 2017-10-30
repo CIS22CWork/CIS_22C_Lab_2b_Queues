@@ -358,13 +358,17 @@ std::ostream& operator<< (std::ostream &foo, List<T> *ListPtr)
 template <class T>
 std::ostream& operator<< (std::ostream &foo, Queue<T> *ListPtr)
 {
-	unsigned int i;
-	unsigned int n = ListPtr->size ();
+	int itemCount = 0;
 	if (ListPtr->empty ()) cout << "Queue is empty" << endl;
 	else
-		for (i = 0; i < n; i++)
+	{
+		Node<T> *currPtr = ListPtr->getTail ();
+		while (currPtr != nullptr)
 		{
-			foo << i + 1 << ". " << ListPtr->getValue (i) << endl;
+			itemCount++;
+			foo << itemCount << ". " << currPtr->value << endl;
+			currPtr = currPtr->next;
 		}
+	}
 	return foo;
 }
