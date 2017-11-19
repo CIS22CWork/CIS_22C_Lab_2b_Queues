@@ -29,6 +29,10 @@ Currency::Currency (int initWhole, int initFractional)
 //
 // returns the currrency whole and fractional as a 
 // double
+//
+// Pre: None
+// Post: Double integer equal to currency amount
+// Purpose: Return amount
 //******************************************************
 double Currency::getAmount ()
 {
@@ -39,6 +43,10 @@ double Currency::getAmount ()
 // addInt           
 //
 // addition operator overloading for int
+//
+// Pre: integer containing amount added
+// Post: none
+// Purpose: Add user inputted amount
 //******************************************************
 void Currency::addInt (int addAmount)
 {
